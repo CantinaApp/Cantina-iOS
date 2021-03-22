@@ -73,37 +73,37 @@ Cantina is a personal cookbook for cocktails. You are able to browse through coc
 ## Schema
 
 ### Models
-We are not using a database through a service like Parse, instead we are storing all the data we need on the user's device.
+We are not using a database through a service like Parse; instead we are storing all the data we need on the user's device.
 
 #### Persistent Data on Device (UserDefaults)
-  Property | Type | Description 
-  ---------|------|------------
-  favoritedIds | Array of String | a list of cocktail ids that have been added to the user's favorites
-  cocktail | Dictionary | a cocktail that has been favorited (nice-to-have)
+Property | Type | Description 
+---------|------|------------
+favoritedIds | Array of String | a list of cocktail ids that have been added to the user's favorites
+cocktail | Dictionary | a cocktail that has been favorited (nice-to-have)
   
 #### Cocktail Model
-This is the model that will be used to store favorited cocktails if we implement the nice-to-have stories.
-  Property | Type | Description
-  ---------|------|------------
-  id | String | id of the cocktail
-  name | String | name of the cocktail
-  description | String | description of the cocktail
-  ingredients | Array of String | a list of ingredients in the cocktail
-  directions | Array of String | a list of steps to make the cocktail
-  picture | String | a url for the image of the cocktail
-  notes | String | user created notes about the cocktail
+This is the model that will be used to parse information from the API. This model will also be used to store favorited cocktails if we implement the nice-to-have stories.
+
+Property | Type | Description
+---------|------|------------
+`id` | `String` | id of the cocktail
+`name` | `String` | name of the cocktail
+`ingredients` | `[String: String]` | a mapping of cocktail ingredients to their measurements
+`instructions` | `String` | a list of steps to make the cocktail
+`glass` | `String` | the type of glass for serving the cocktail
+`imageUrl` | `String` | a url for the image of the cocktail
+`notes` | `String` | user created notes about the cocktail (nice-to-have)
 
 ### Networking
-Because we are not using a database, we do not create any API calls to Parse or a server we made ourselves. Instead, we are receiving all data from an already-existing API called TheCocktailDB.
+Because we are not using a database, we do not create any API calls to Parse or a server we made ourselves. Instead, we are receiving all data from an already-existing API, TheCocktailDB.
 
 #### TheCocktailDB
-- Base URL - [https://www.thecocktaildb.com/api/json/v1/1/](https://www.thecocktaildb.com/api/json/v1/1/)
+Base URL: [https://www.thecocktaildb.com/api/json/v1/1/](https://www.thecocktaildb.com/api/json/v1/1/)
 
   HTTP Verb | Endpoint | Description
   ----------|----------|------------
-  `GET`     | /popular.php  | gets a list of popular cocktails
-  `GET`     | /randomselection.php | gets a list of 10 random cocktails
-  `GET`     | /lookup.php | gets the details of a cocktail by id
-  `GET`     | /images/media/drink/<id>.jpg/preview | gets the thumbnail of a cocktail
   `GET`     | /search.php | searches for a cocktail by name
   `GET`     | /filter.php | searches for a cocktail by ingredient
+  `GET`     | /lookup.php | gets the details of a cocktail by id
+  `GET`     | /images/media/drink/<id>.jpg | gets the image for a cocktail
+

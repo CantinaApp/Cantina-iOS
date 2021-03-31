@@ -7,19 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E540A392613CF8A0054CF63 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E540A382613CF8A0054CF63 /* ModelData.swift */; };
+		4E540A3C2613FBFD0054CF63 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E540A3B2613FBFD0054CF63 /* ImageView.swift */; };
 		4E7833BC25FAA329002E0E4E /* CantinaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7833BB25FAA329002E0E4E /* CantinaApp.swift */; };
 		4E7833BE25FAA329002E0E4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7833BD25FAA329002E0E4E /* ContentView.swift */; };
 		4E7833C025FAA32A002E0E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7833BF25FAA32A002E0E4E /* Assets.xcassets */; };
 		4E7833C325FAA32A002E0E4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7833C225FAA32A002E0E4E /* Preview Assets.xcassets */; };
+		4E8C648126129E35008DB114 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C648026129E35008DB114 /* Cocktail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E540A382613CF8A0054CF63 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		4E540A3B2613FBFD0054CF63 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		4E7833B825FAA329002E0E4E /* Cantina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cantina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7833BB25FAA329002E0E4E /* CantinaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantinaApp.swift; sourceTree = "<group>"; };
 		4E7833BD25FAA329002E0E4E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E7833BF25FAA32A002E0E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E7833C225FAA32A002E0E4E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4E7833C425FAA32A002E0E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E8C648026129E35008DB114 /* Cocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,8 @@
 			children = (
 				4E7833BB25FAA329002E0E4E /* CantinaApp.swift */,
 				4E7833BD25FAA329002E0E4E /* ContentView.swift */,
+				4E8C647E26129E14008DB114 /* Models */,
+				4E8C647F26129E24008DB114 /* Views */,
 				4E7833BF25FAA32A002E0E4E /* Assets.xcassets */,
 				4E7833C425FAA32A002E0E4E /* Info.plist */,
 				4E7833C125FAA32A002E0E4E /* Preview Content */,
@@ -67,6 +75,23 @@
 				4E7833C225FAA32A002E0E4E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4E8C647E26129E14008DB114 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4E8C648026129E35008DB114 /* Cocktail.swift */,
+				4E540A382613CF8A0054CF63 /* ModelData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4E8C647F26129E24008DB114 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4E540A3B2613FBFD0054CF63 /* ImageView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E540A3C2613FBFD0054CF63 /* ImageView.swift in Sources */,
 				4E7833BE25FAA329002E0E4E /* ContentView.swift in Sources */,
+				4E540A392613CF8A0054CF63 /* ModelData.swift in Sources */,
 				4E7833BC25FAA329002E0E4E /* CantinaApp.swift in Sources */,
+				4E8C648126129E35008DB114 /* Cocktail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

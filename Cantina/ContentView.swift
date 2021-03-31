@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        List {
+            ForEach(modelData.cocktails) { (cocktail) in
+                HStack {
+                    ImageView(url: cocktail.imageUrl)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 75, height: 75)
+                    Text(cocktail.name)
+                }
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ModelData())
     }
 }

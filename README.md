@@ -75,7 +75,7 @@ We are not using a database through a service like Parse; instead we are storing
 #### Persistent Data on Device (UserDefaults)
 Property | Type | Description 
 ---------|------|------------
-`cocktails` | `[String: Cocktail]` | a mapping of favorited cocktail ID's to their data (the data will only be present if offline storage is implemented; otherwise, it is just an array of IDs)
+`favorites` | `[String: Cocktail]` | a mapping of favorited cocktail ID's to their data (the data will only be present if offline storage is implemented; otherwise, it is just an array of IDs)
   
 #### Cocktail Model
 This is the model that will be used to parse information from the API. This model will also be used to store favorited cocktails if we implement the nice-to-have stories.

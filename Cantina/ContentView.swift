@@ -8,26 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var modelData: ModelData
+    
     
     var body: some View {
         TabView {
-            List {
-                ForEach(modelData.cocktails) { (cocktail) in
-                    HStack {
-                        ImageView(url: cocktail.imageUrl)
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 75, height: 75)
-                        Text(cocktail.name)
-                    }
+            CocktailsView()
+                .tabItem {
+                    Image("CocktailTabBarIcon")
+                    Text("Cocktails")
                 }
-            }
-            .tabItem {
-                Image("CocktailTabBarIcon")
-                Text("Cocktails")
-            }
             
-            Text("Favorites")
+            FavoritesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favorites")

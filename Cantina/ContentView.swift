@@ -11,15 +11,27 @@ struct ContentView: View {
     @EnvironmentObject var modelData: ModelData
     
     var body: some View {
-        List {
-            ForEach(modelData.cocktails) { (cocktail) in
-                HStack {
-                    ImageView(url: cocktail.imageUrl)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 75, height: 75)
-                    Text(cocktail.name)
+        TabView {
+            List {
+                ForEach(modelData.cocktails) { (cocktail) in
+                    HStack {
+                        ImageView(url: cocktail.imageUrl)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 75, height: 75)
+                        Text(cocktail.name)
+                    }
                 }
             }
+            .tabItem {
+                Image("CocktailTabBarIcon")
+                Text("Cocktails")
+            }
+            
+            Text("Favorites")
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                    Text("Favorites")
+                }
         }
     }
 }

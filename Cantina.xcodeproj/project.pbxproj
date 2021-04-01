@@ -65,9 +65,9 @@
 				4E8C647E26129E14008DB114 /* Models */,
 				4E8C647F26129E24008DB114 /* Views */,
 				4E7833BF25FAA32A002E0E4E /* Assets.xcassets */,
+				6041CA77261671010054BA37 /* LaunchScreen.storyboard */,
 				4E7833C425FAA32A002E0E4E /* Info.plist */,
 				4E7833C125FAA32A002E0E4E /* Preview Content */,
-				6041CA77261671010054BA37 /* LaunchScreen.storyboard */,
 			);
 			path = Cantina;
 			sourceTree = "<group>";

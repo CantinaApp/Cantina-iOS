@@ -8,16 +8,39 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @EnvironmentObject var modelData: ModelData
+    
+    var columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         NavigationView {
-            Text("Favorites")
+            
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(modelData.cocktails) { (cocktail) in
+                        VStack {
+                            ImageView(url: cocktail.imageUrl)
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 75, height: 75)
+                                Text(cocktail.name)
+                                    .font(      .system(size:   12))
+                                    .lineLimit(2)
+                                    .frame(height: 30)
+                        }
+                    }
+                }
                 .navigationBarTitle("Favorites")
+            }
         }
     }
 }
 
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView()
+        FavoritesView().environmentObject(ModelData())
     }
 }

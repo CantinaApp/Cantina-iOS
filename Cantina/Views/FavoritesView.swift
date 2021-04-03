@@ -27,7 +27,7 @@ struct FavoritesView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 75, height: 75)
                                 Text(cocktail.name)
-                                    .font(      .system(size:   12))
+                                    .font(.system(size: 12))
                                     .lineLimit(2)
                                     .frame(height: 30)
                         }

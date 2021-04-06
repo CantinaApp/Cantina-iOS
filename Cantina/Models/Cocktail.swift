@@ -97,6 +97,32 @@ struct Cocktail: Hashable, Decodable, Identifiable {
         })
     }
     
+    func isFavorite() -> Bool {
+        let favorites = Cocktail.getFavorites()
+        return favorites[self.id] != nil
+    }
+    
+    func addToFavorites() {
+        var favorites = Cocktail.getFavorites()
+        favorites[self.id] = ""
+        UserDefaults.standard.set(favorites, forKey: "favorites")
+    }
+    
+    func removeFromFavorites() {
+        var favorites = Cocktail.getFavorites()
+        favorites.removeValue(forKey: self.id)
+        UserDefaults.standard.set(favorites, forKey: "favorites")
+    }
+    
+    private static func getFavorites() -> [String: String] {
+        var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
+        if favorites == nil {
+            favorites = [String: String]()
+            UserDefaults.standard.set(favorites, forKey: "favorites")
+        }
+        return favorites as! [String: String]
+    }
+    
     // TODO: Add Encodable protocol for storing favorites offline
 }
 

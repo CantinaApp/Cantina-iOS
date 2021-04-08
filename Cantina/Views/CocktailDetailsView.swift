@@ -13,35 +13,55 @@ struct CocktailDetailsView: View {
 
     var body: some View {
         ScrollView {
+            GeometryReader { geometry in
+                ZStack {
+                    if geometry.frame(in: .global).minY <= 0 {
+                        ImageView(url: cocktail.imageUrl)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .offset(y: geometry.frame(in: .global).minY/9)
+                            .clipped()
+                    } else {
+                        ImageView(url: cocktail.imageUrl)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height + geometry.frame(in: .global).minY)
+                            .clipped()
+                            .offset(y: -geometry.frame(in: .global).minY)
+                    }
+                }
+            }
+            .frame(height: 400)
+            
             VStack(alignment: .leading) {
-                ImageView(url: cocktail.imageUrl)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 250, height: 250)
+                Text(cocktail.name)
+                    .font(.largeTitle)
+                    .bold()
+                    .lineLimit(nil)
+                    .padding(.top, 10)
                 
                 VStack(alignment: .leading) {
                     Text("Ingredients")
-                        .font(.title)
+                        .font(.title2)
                         .bold()
-                    
+
                     ForEach(Array(cocktail.ingredients.keys), id: \.self) { (ingredient) in
                         Text(cocktail.ingredients[ingredient]!.lowercased() + " of " + ingredient)
                     }
                 }
                 .padding(.top, 20)
-                
+
                 VStack(alignment: .leading) {
                     Text("Instructions")
-                        .font(.title)
+                        .font(.title2)
                         .bold()
-                    
+
                     Text(cocktail.instructions)
                 }
                 .padding(.top, 20)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(20)
+            .frame(width: 350)
         }
-        .navigationBarTitle(cocktail.name)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

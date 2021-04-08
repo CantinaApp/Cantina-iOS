@@ -16,6 +16,7 @@
 		4E8C648126129E35008DB114 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C648026129E35008DB114 /* Cocktail.swift */; };
 		4EF468E826169135007CCA93 /* CocktailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF468E726169135007CCA93 /* CocktailsView.swift */; };
 		4EF468EB26169243007CCA93 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF468EA26169243007CCA93 /* FavoritesView.swift */; };
+		600B8EEF261E743F0000C9FF /* CocktailDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */; };
 		6041CA78261671010054BA37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6041CA77261671010054BA37 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		4E8C648026129E35008DB114 /* Cocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
 		4EF468E726169135007CCA93 /* CocktailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsView.swift; sourceTree = "<group>"; };
 		4EF468EA26169243007CCA93 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailsView.swift; sourceTree = "<group>"; };
 		6041CA77261671010054BA37 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				4EF468E726169135007CCA93 /* CocktailsView.swift */,
 				4EF468EA26169243007CCA93 /* FavoritesView.swift */,
 				4E540A3B2613FBFD0054CF63 /* ImageView.swift */,
+				600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				4EF468EB26169243007CCA93 /* FavoritesView.swift in Sources */,
 				4E7833BC25FAA329002E0E4E /* CantinaApp.swift in Sources */,
 				4E8C648126129E35008DB114 /* Cocktail.swift in Sources */,
+				600B8EEF261E743F0000C9FF /* CocktailDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

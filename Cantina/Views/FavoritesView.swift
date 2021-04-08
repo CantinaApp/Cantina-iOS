@@ -18,18 +18,19 @@ struct FavoritesView: View {
     
     var body: some View {
         NavigationView {
-            
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(modelData.cocktails) { (cocktail) in
-                        VStack {
-                            ImageView(url: cocktail.imageUrl)
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 75, height: 75)
-                                Text(cocktail.name)
-                                    .font(.system(size: 12))
-                                    .lineLimit(2)
-                                    .frame(height: 30)
+                        NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
+                            VStack {
+                                ImageView(url: cocktail.imageUrl)
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 75, height: 75)
+                                    Text(cocktail.name)
+                                        .font(.system(size: 12))
+                                        .lineLimit(2)
+                                        .frame(height: 30)
+                            }
                         }
                     }
                 }

@@ -15,10 +15,12 @@ struct CocktailsView: View {
             List {
                 ForEach(modelData.cocktails) { (cocktail) in
                     HStack {
-                        ImageView(url: cocktail.imageUrl)
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 75, height: 75)
-                        Text(cocktail.name)
+                        NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
+                            ImageView(url: cocktail.imageUrl)
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 75, height: 75)
+                            Text(cocktail.name)
+                        }
                     }
                 }
             }

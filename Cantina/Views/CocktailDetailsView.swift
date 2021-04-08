@@ -10,6 +10,10 @@ import SwiftUI
 struct CocktailDetailsView: View {
     @EnvironmentObject var modelData: ModelData
     var cocktail: Cocktail
+    
+    var cocktailIndex: Int {
+        modelData.cocktails.firstIndex(of: cocktail)!
+    }
 
     var body: some View {
         ScrollView {
@@ -33,11 +37,16 @@ struct CocktailDetailsView: View {
             .frame(height: 400)
             
             VStack(alignment: .leading) {
-                Text(cocktail.name)
-                    .font(.largeTitle)
-                    .bold()
-                    .lineLimit(nil)
-                    .padding(.top, 10)
+                HStack {
+                    Text(cocktail.name)
+                        .bold()
+                        .lineLimit(nil)
+                    FavoriteButton(isFavorited: $modelData.cocktails[cocktailIndex].isFavorite)
+                        .padding(.leading, 5)
+                        
+                }
+                .font(.largeTitle)
+                .padding(.top, 10)
                 
                 VStack(alignment: .leading) {
                     Text("Ingredients")

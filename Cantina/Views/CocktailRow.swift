@@ -12,19 +12,10 @@ struct CocktailRow: View {
     
     var body: some View {
         HStack {
-            HStack {
-                ImageView(url: cocktail.imageUrl)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 75, height: 75)
-                Text(cocktail.name)
-            }
-            
-            Spacer()
-            
-            if cocktail.isFavorite() {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.red)
-            }
+            ImageView(url: cocktail.imageUrl)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75)
+            Text(cocktail.name)
         }
     }
 }

@@ -45,7 +45,7 @@ struct CocktailDetailsView: View {
                         .bold()
 
                     ForEach(Array(cocktail.ingredients.keys), id: \.self) { (ingredient) in
-                        Text(cocktail.ingredients[ingredient]!.lowercased() + " of " + ingredient)
+                        Text(cocktail.ingredients[ingredient]! + ingredient)
                     }
                 }
                 .padding(.top, 20)

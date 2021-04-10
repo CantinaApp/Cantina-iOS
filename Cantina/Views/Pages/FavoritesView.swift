@@ -18,24 +18,26 @@ struct FavoritesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            HStack {
                 if !modelData.cocktails.contains { cocktail in cocktail.isFavorite } {
                     Text("You have no favorited cocktails.")
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                        .frame(width: 250, height: 50)
+                        .font(.title2)
+                        .lineLimit(0)
                 } else {
-                    LazyVGrid(columns: columns) {
-                        ForEach(modelData.cocktails) { (cocktail) in
-                            if cocktail.isFavorite {
-                                NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
-                                    CocktailGridItem(cocktail: cocktail)
+                    ScrollView {
+                        LazyVGrid(columns: columns) {
+                            ForEach(modelData.cocktails) { (cocktail) in
+                                if cocktail.isFavorite {
+                                    NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
+                                        CocktailGridItem(cocktail: cocktail)
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }.navigationBarTitle("Favorites")
+            }
+            .navigationBarTitle("Favorites")
         }
     }
 }

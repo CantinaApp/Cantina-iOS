@@ -20,6 +20,7 @@
 		4EF468EB26169243007CCA93 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF468EA26169243007CCA93 /* FavoritesView.swift */; };
 		600B8EEF261E743F0000C9FF /* CocktailDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */; };
 		6041CA78261671010054BA37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6041CA77261671010054BA37 /* LaunchScreen.storyboard */; };
+		608EA6E62620C93700B9DBEB /* CocktailGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608EA6E52620C93700B9DBEB /* CocktailGridItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		4EF468EA26169243007CCA93 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailsView.swift; sourceTree = "<group>"; };
 		6041CA77261671010054BA37 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		608EA6E52620C93700B9DBEB /* CocktailGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailGridItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				4ED7E3DB261CD30600C8C9A3 /* FavoriteButton.swift */,
 				4E540A3B2613FBFD0054CF63 /* ImageView.swift */,
 				600B8EEE261E743F0000C9FF /* CocktailDetailsView.swift */,
+				608EA6E52620C93700B9DBEB /* CocktailGridItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				4E540A392613CF8A0054CF63 /* ModelData.swift in Sources */,
 				4EF468EB26169243007CCA93 /* FavoritesView.swift in Sources */,
 				4E7833BC25FAA329002E0E4E /* CantinaApp.swift in Sources */,
+				608EA6E62620C93700B9DBEB /* CocktailGridItem.swift in Sources */,
 				4E8C648126129E35008DB114 /* Cocktail.swift in Sources */,
 				600B8EEF261E743F0000C9FF /* CocktailDetailsView.swift in Sources */,
 			);

@@ -19,23 +19,23 @@ struct FavoritesView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(modelData.cocktails) { (cocktail) in
-                        NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
-                            VStack {
-                                ImageView(url: cocktail.imageUrl)
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 75, height: 75)
-                                    Text(cocktail.name)
-                                        .font(.system(size: 12))
-                                        .lineLimit(2)
-                                        .frame(height: 30)
+                if !modelData.cocktails.contains { cocktail in cocktail.isFavorite } {
+                    Text("You have no favorited cocktails.")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                        .frame(width: 250, height: 50)
+                } else {
+                    LazyVGrid(columns: columns) {
+                        ForEach(modelData.cocktails) { (cocktail) in
+                            if cocktail.isFavorite {
+                                NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
+                                    CocktailGridItem(cocktail: cocktail)
+                                }
                             }
                         }
                     }
                 }
-                .navigationBarTitle("Favorites")
-            }
+            }.navigationBarTitle("Favorites")
         }
     }
 }

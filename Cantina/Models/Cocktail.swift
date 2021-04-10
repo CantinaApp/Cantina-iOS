@@ -15,6 +15,7 @@ struct Cocktail: Hashable, Decodable, Identifiable {
     var instructions: String
     var ingredients: [String: String]
     var imageUrl: URL
+    var previewUrl: URL
     
     private enum CodingKeys: String, CodingKey {
         case id = "idDrink"
@@ -65,6 +66,7 @@ struct Cocktail: Hashable, Decodable, Identifiable {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.ingredients = [String: String]()
         self.imageUrl = URL(string: try container.decode(String.self, forKey: .imageUrl))!
+        self.previewUrl = URL(string: try container.decode(String.self, forKey: .imageUrl) + "/preview")!
         
         let ingredientKeys = [
             CodingKeys.ingredient1: CodingKeys.measurement1,

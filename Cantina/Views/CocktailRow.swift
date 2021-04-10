@@ -12,7 +12,7 @@ struct CocktailRow: View {
     
     var body: some View {
         HStack {
-            ImageView(url: cocktail.imageUrl)
+            ImageView(url: cocktail.previewUrl)
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 75, height: 75)
             Text(cocktail.name)

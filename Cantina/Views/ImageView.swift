@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var imageLoader: ImageLoader
-    @State var image: UIImage = UIImage()
     
     init(url: URL) {
         imageLoader = ImageLoader(imageURL: url)
@@ -28,8 +27,7 @@ class ImageLoader: ObservableObject {
     @Published var data = Data()
     
     init(imageURL: URL) {
-        // Create URL:Image cache
-        URLCache.shared = URLCache(memoryCapacity: 6*(1024*1024), diskCapacity: 40*(1024*1024), diskPath: nil) // 6MB mem | 40MB disk
+        // URL:Image cache
         let cache = URLCache.shared
         
         let request = URLRequest(url: imageURL, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 60.0)

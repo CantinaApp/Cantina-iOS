@@ -14,6 +14,10 @@ final class ModelData: ObservableObject {
     init() {
         self.cocktails = [Cocktail]()
         loadCocktails()
+        
+        // Set image cache capacity
+        URLCache.shared.memoryCapacity = 6 * (1024*1024) // 6MB ram
+        URLCache.shared.diskCapacity = 40 * (1024*1024) // 40MB disk
     }
     
     func loadCocktails() {

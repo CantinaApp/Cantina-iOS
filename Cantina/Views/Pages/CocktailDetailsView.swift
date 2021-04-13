@@ -41,9 +41,15 @@ struct CocktailDetailsView: View {
                     Text(cocktail.name)
                         .bold()
                         .lineLimit(nil)
+                    
                     FavoriteButton(isFavorited: $modelData.cocktails[cocktailIndex].isFavorite)
                         .padding(.leading, 5)
-                        
+                    
+                    Button(action: { showShareSheet(name: cocktail.name, instructions: cocktail.instructions, ingredients: cocktail.ingredients) }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(Color.gray)
+                    }
+                    .padding(.leading, 5)
                 }
                 .font(.largeTitle)
                 .padding(.top, 10)
@@ -71,6 +77,18 @@ struct CocktailDetailsView: View {
             .frame(width: 350)
         }
         .edgesIgnoringSafeArea(.top)
+    }
+    
+    func showShareSheet(name: String, instructions: String, ingredients: [String: String]) {
+        var ingredientsString = ""
+        for key in ingredients.keys {
+            ingredientsString.append(cocktail.ingredients[key]! + " " + key + "\n")
+        }
+        
+        let shareString = [name + "\n" + ingredientsString + instructions]
+        let activityController = UIActivityViewController(activityItems: shareString, applicationActivities: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
     }
 }
 

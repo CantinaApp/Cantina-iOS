@@ -15,6 +15,8 @@ struct CocktailRow: View {
             ImageView(url: cocktail.previewUrl)
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 75, height: 75)
+                .cornerRadius(10)
+                .padding(.trailing, 10)
             Text(cocktail.name)
         }
     }

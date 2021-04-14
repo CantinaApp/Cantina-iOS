@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Cocktail: Hashable, Decodable, Identifiable {
+struct Cocktail: Hashable, Identifiable {
     var id: String
     var name: String
     var glass: String
@@ -17,6 +17,42 @@ struct Cocktail: Hashable, Decodable, Identifiable {
     var imageUrl: URL
     var previewUrl: URL
     
+    var isFavorite: Bool {
+        get {
+            let favorites = Cocktail.getFavorites()
+            return favorites[self.id] != nil
+        }
+        
+        set {
+            newValue == true ? addToFavorites() : removeFromFavorites()
+        }
+    }
+    
+    private func addToFavorites() {
+        var favorites = Cocktail.getFavorites()
+        favorites[self.id] = ""
+        UserDefaults.standard.set(favorites, forKey: "favorites")
+    }
+    
+    private func removeFromFavorites() {
+        var favorites = Cocktail.getFavorites()
+        favorites.removeValue(forKey: self.id)
+        UserDefaults.standard.set(favorites, forKey: "favorites")
+    }
+    
+    private static func getFavorites() -> [String: String] {
+        var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
+        if favorites == nil {
+            favorites = [String: String]()
+            UserDefaults.standard.set(favorites, forKey: "favorites")
+        }
+        return favorites as! [String: String]
+    }
+    
+    
+}
+
+extension Cocktail: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "idDrink"
         case name = "strDrink"
@@ -100,40 +136,6 @@ struct Cocktail: Hashable, Decodable, Identifiable {
     }
     
     // TODO: Add Encodable protocol for storing favorites offline
-}
-
-extension Cocktail {
-    var isFavorite: Bool {
-        get {
-            let favorites = Cocktail.getFavorites()
-            return favorites[self.id] != nil
-        }
-        
-        set {
-            newValue == true ? addToFavorites() : removeFromFavorites()
-        }
-    }
-    
-    private func addToFavorites() {
-        var favorites = Cocktail.getFavorites()
-        favorites[self.id] = ""
-        UserDefaults.standard.set(favorites, forKey: "favorites")
-    }
-    
-    private func removeFromFavorites() {
-        var favorites = Cocktail.getFavorites()
-        favorites.removeValue(forKey: self.id)
-        UserDefaults.standard.set(favorites, forKey: "favorites")
-    }
-    
-    private static func getFavorites() -> [String: String] {
-        var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
-        if favorites == nil {
-            favorites = [String: String]()
-            UserDefaults.standard.set(favorites, forKey: "favorites")
-        }
-        return favorites as! [String: String]
-    }
 }
 
 // Used to decode from /search endpoint

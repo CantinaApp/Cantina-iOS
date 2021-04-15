@@ -139,6 +139,8 @@
 			dependencies = (
 			);
 			name = Cantina;
+			packageProductDependencies = (
+			);
 			productName = Cantina;
 			productReference = 4E7833B825FAA329002E0E4E /* Cantina.app */;
 			productType = "com.apple.product-type.application";
@@ -166,6 +168,8 @@
 				Base,
 			);
 			mainGroup = 4E7833AF25FAA329002E0E4E;
+			packageReferences = (
+			);
 			productRefGroup = 4E7833B925FAA329002E0E4E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

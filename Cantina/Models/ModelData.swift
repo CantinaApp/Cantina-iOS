@@ -20,30 +20,59 @@ final class ModelData: ObservableObject {
         URLCache.shared.diskCapacity = 40 * (1024*1024) // 40MB disk
     }
     
-    func loadCocktails() {
+    private func loadCocktails() {
+        loadFavoritesFromStorage()
+        loadCocktailsFromAPI()
+    }
+
+    private func loadCocktailsFromAPI() {
         var baseUrl = URLComponents(string: "https://www.thecocktaildb.com/api/json/v1/1/search.php")!
+        
+        let group = DispatchGroup()
+        var cocktails = [Cocktail]()
         
         for letter in "abcdefghijklmnopqrstuvwxyz" {
             // Append query item for "first letter"
             let query = [URLQueryItem(name: "f", value: String(letter))]
             baseUrl.queryItems = query
             
+            group.enter()
             // Asynchronously get each list of cocktails (grouped by first letter)
             let task = URLSession.shared.dataTask(with: baseUrl.url!) { (data, response, error) in
                 guard let data = data else { return }
                 DispatchQueue.main.async {
                     let decoder = JSONDecoder()
                     if let cocktailList = try? decoder.decode(CocktailList.self, from: data) {
-                        self.cocktails.append(contentsOf: cocktailList.drinks)
-                        
-                        // TODO: Remove sorting or make entire operation sync
-                        self.cocktails.sort { (a, b) -> Bool in
-                            a.name < b.name
-                        }
+                        cocktails.append(contentsOf: cocktailList.drinks)
                     }
+                    group.leave()
                 }
             }
             task.resume()
+        }
+        
+        group.notify(queue: .main) {
+            self.removeDuplicatesAndSort(&cocktails)
+            self.cocktails = cocktails
+        }
+    }
+    
+    private func loadFavoritesFromStorage() {
+        let favorites = Cocktail.getFavorites()
+        favorites.forEach { (favorite) in
+            let (_, data) = favorite
+            let decoder = JSONDecoder()
+            let cocktail = try! decoder.decode(Cocktail.self, from: data)
+            self.cocktails.append(cocktail)
+        }
+        
+        removeDuplicatesAndSort(&self.cocktails)
+    }
+    
+    private func removeDuplicatesAndSort(_ cocktails: inout [Cocktail]) {
+        cocktails = Array(Set(cocktails))
+        cocktails.sort { (a, b) -> Bool in
+            a.name < b.name
         }
     }
 }

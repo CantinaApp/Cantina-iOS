@@ -29,9 +29,8 @@ extension Cocktail {
             newValue == true ? addToFavorites() : removeFromFavorites()
         }
     }
-    
-    // FIXME: Might get really slow.
-    private static func getFavorites() -> [String: Data] {
+
+    static func getFavorites() -> [String: Data] {
         var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
         if favorites == nil {
             favorites = [String: Data]()
@@ -39,13 +38,13 @@ extension Cocktail {
         }
         return favorites as! [String: Data]
     }
-    
+
     private func addToFavorites() {
         var favorites = Cocktail.getFavorites()
         favorites[self.id] = try! JSONEncoder().encode(self)
         UserDefaults.standard.set(favorites, forKey: "favorites")
     }
-    
+
     private func removeFromFavorites() {
         var favorites = Cocktail.getFavorites()
         favorites.removeValue(forKey: self.id)

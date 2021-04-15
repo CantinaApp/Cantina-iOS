@@ -16,21 +16,33 @@ struct Cocktail: Hashable, Identifiable {
     var ingredients: [String: String]
     var imageUrl: URL
     var previewUrl: URL
-    
+}
+
+// MARK: Favoriting
+extension Cocktail {
     var isFavorite: Bool {
         get {
             let favorites = Cocktail.getFavorites()
             return favorites[self.id] != nil
         }
-        
         set {
             newValue == true ? addToFavorites() : removeFromFavorites()
         }
     }
     
+    // FIXME: Might get really slow.
+    private static func getFavorites() -> [String: Data] {
+        var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
+        if favorites == nil {
+            favorites = [String: Data]()
+            UserDefaults.standard.set(favorites, forKey: "favorites")
+        }
+        return favorites as! [String: Data]
+    }
+    
     private func addToFavorites() {
         var favorites = Cocktail.getFavorites()
-        favorites[self.id] = ""
+        favorites[self.id] = try! JSONEncoder().encode(self)
         UserDefaults.standard.set(favorites, forKey: "favorites")
     }
     
@@ -39,21 +51,11 @@ struct Cocktail: Hashable, Identifiable {
         favorites.removeValue(forKey: self.id)
         UserDefaults.standard.set(favorites, forKey: "favorites")
     }
-    
-    private static func getFavorites() -> [String: String] {
-        var favorites = UserDefaults.standard.dictionary(forKey: "favorites")
-        if favorites == nil {
-            favorites = [String: String]()
-            UserDefaults.standard.set(favorites, forKey: "favorites")
-        }
-        return favorites as! [String: String]
-    }
-    
-    
 }
 
-extension Cocktail: Decodable {
-    private enum CodingKeys: String, CodingKey {
+// MARK: Decoding
+extension Cocktail: Codable {
+    private enum APICodingKeys: String, CodingKey {
         case id = "idDrink"
         case name = "strDrink"
         case glass = "strGlass"
@@ -92,50 +94,70 @@ extension Cocktail: Decodable {
         case measurement14 = "strMeasure14"
         case measurement15 = "strMeasure15"
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.id = try container.decode(String.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.glass = try container.decode(String.self, forKey: .glass)
-        self.instructions = try container.decode(String.self, forKey: .instructions)
-        self.ingredients = [String: String]()
-        self.imageUrl = URL(string: try container.decode(String.self, forKey: .imageUrl))!
-        self.previewUrl = URL(string: try container.decode(String.self, forKey: .imageUrl) + "/preview")!
-        
-        let ingredientKeys = [
-            CodingKeys.ingredient1: CodingKeys.measurement1,
-            CodingKeys.ingredient2: CodingKeys.measurement2,
-            CodingKeys.ingredient3: CodingKeys.measurement3,
-            CodingKeys.ingredient4: CodingKeys.measurement4,
-            CodingKeys.ingredient5: CodingKeys.measurement5,
-            CodingKeys.ingredient6: CodingKeys.measurement6,
-            CodingKeys.ingredient7: CodingKeys.measurement7,
-            CodingKeys.ingredient8: CodingKeys.measurement8,
-            CodingKeys.ingredient9: CodingKeys.measurement9,
-            CodingKeys.ingredient10: CodingKeys.measurement10,
-            CodingKeys.ingredient11: CodingKeys.measurement11,
-            CodingKeys.ingredient12: CodingKeys.measurement12,
-            CodingKeys.ingredient13: CodingKeys.measurement13,
-            CodingKeys.ingredient14: CodingKeys.measurement14,
-            CodingKeys.ingredient15: CodingKeys.measurement15
-        ]
-        
-        // Generate key-value pairs for each ingredient
-        try ingredientKeys.forEach({ (ingredient, measurement) in
-            do {
-                let ingredient = try container.decode(String.self, forKey: ingredient)
-                let measurement = try container.decode(String.self, forKey: measurement)
-                self.ingredients[ingredient] = measurement
-            } catch DecodingError.valueNotFound {
-                // Inside of closure, so return will only end current iteration
-                return
-            }
-        })
+    private enum CodingKeys: String, CodingKey {
+        case id, name, glass, instructions, ingredients, imageUrl, previewUrl
     }
     
-    // TODO: Add Encodable protocol for storing favorites offline
+    init(from decoder: Decoder) throws {
+        if let cocktail = Cocktail(fromAPI: decoder) {
+            self = cocktail
+        } else {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.id = try container.decode(String.self, forKey: .id)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.glass = try container.decode(String.self, forKey: .glass)
+            self.instructions = try container.decode(String.self, forKey: .instructions)
+            self.ingredients = try container.decode([String: String].self, forKey: .ingredients)
+            self.imageUrl  = try container.decode(URL.self, forKey: .imageUrl)
+            self.previewUrl = try container.decode(URL.self, forKey: .previewUrl)
+        }
+    }
+    
+    init?(fromAPI decoder: Decoder) {
+        let ingredientMap = [
+            APICodingKeys.ingredient1: APICodingKeys.measurement1,
+            APICodingKeys.ingredient2: APICodingKeys.measurement2,
+            APICodingKeys.ingredient3: APICodingKeys.measurement3,
+            APICodingKeys.ingredient4: APICodingKeys.measurement4,
+            APICodingKeys.ingredient5: APICodingKeys.measurement5,
+            APICodingKeys.ingredient6: APICodingKeys.measurement6,
+            APICodingKeys.ingredient7: APICodingKeys.measurement7,
+            APICodingKeys.ingredient8: APICodingKeys.measurement8,
+            APICodingKeys.ingredient9: APICodingKeys.measurement9,
+            APICodingKeys.ingredient10: APICodingKeys.measurement10,
+            APICodingKeys.ingredient11: APICodingKeys.measurement11,
+            APICodingKeys.ingredient12: APICodingKeys.measurement12,
+            APICodingKeys.ingredient13: APICodingKeys.measurement13,
+            APICodingKeys.ingredient14: APICodingKeys.measurement14,
+            APICodingKeys.ingredient15: APICodingKeys.measurement15
+        ]
+        
+        do {
+            let container = try decoder.container(keyedBy: APICodingKeys.self)
+            
+            self.id = try container.decode(String.self, forKey: .id)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.glass = try container.decode(String.self, forKey: .glass)
+            self.instructions = try container.decode(String.self, forKey: .instructions)
+            self.ingredients = [String: String]()
+            self.imageUrl = URL(string: try container.decode(String.self, forKey: .imageUrl))!
+            self.previewUrl = self.imageUrl.appendingPathComponent("/preview")
+            
+            try ingredientMap.forEach { (ingredient, measurement) in
+                do {
+                    let ingredient = try container.decode(String.self, forKey: ingredient)
+                    let measurement = (try? container.decode(String.self, forKey: measurement)) ?? ""
+                    self.ingredients[ingredient] = measurement
+                } catch DecodingError.valueNotFound {
+                    // Inside of closure, so return will only end current iteration
+                    return
+                }
+            }
+            
+        } catch {
+            return nil
+        }
+    }
 }
 
 // Used to decode from /search endpoint

@@ -85,7 +85,7 @@ struct CocktailDetailsView: View {
             ingredientsString.append(cocktail.ingredients[key]! + " " + key + "\n")
         }
         
-        let shareString = [name + "\n" + ingredientsString + instructions]
+        let shareString = ["Cocktail: " + name + "\nIngredients:\n" + ingredientsString + "Instructions: " + instructions]
         let activityController = UIActivityViewController(activityItems: shareString, applicationActivities: nil)
         
         UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)

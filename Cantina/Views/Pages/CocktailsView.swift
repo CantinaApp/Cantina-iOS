@@ -10,10 +10,12 @@ import SwiftUI
 struct CocktailsView: View {
     @EnvironmentObject var modelData: ModelData
     
+    @ObservedObject var searchBar: SearchBar = SearchBar()
+
     var body: some View {
         NavigationView {
             List {
-                ForEach(modelData.cocktails) { (cocktail) in
+                ForEach(modelData.cocktails.filter { searchBar.text.isEmpty || $0.name.localizedStandardContains(searchBar.text) }) { (cocktail) in
                     HStack {
                         NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
                             CocktailRow(cocktail: cocktail)
@@ -22,6 +24,7 @@ struct CocktailsView: View {
                 }
             }
             .navigationBarTitle("Cocktails")
+            .add(searchBar)
         }
     }
 }

@@ -26,11 +26,9 @@ struct FavoritesView: View {
                 } else {
                     ScrollView {
                         LazyVGrid(columns: columns) {
-                            ForEach(modelData.cocktails) { (cocktail) in
-                                if cocktail.isFavorite {
-                                    NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
-                                        CocktailGridItem(cocktail: cocktail)
-                                    }
+                            ForEach(modelData.cocktails.filter { $0.isFavorite }) { (cocktail) in
+                                NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
+                                    CocktailGridItem(cocktail: cocktail)
                                 }
                             }
                         }

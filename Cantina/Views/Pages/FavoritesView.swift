@@ -12,7 +12,6 @@ struct FavoritesView: View {
     
     var columns: [GridItem] = [
         GridItem(.flexible()),
-        GridItem(.flexible()),
         GridItem(.flexible())
     ]
     

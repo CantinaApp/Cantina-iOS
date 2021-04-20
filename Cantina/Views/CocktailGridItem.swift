@@ -16,12 +16,10 @@ struct CocktailGridItem: View {
                 VStack {
                     ImageView(url: cocktail.previewUrl)
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 75, height: 75)
+                        .frame(width: 125, height: 125)
+                        .cornerRadius(10)
                     Text(cocktail.name)
-                        .font(.system(size: 12))
-                        .lineLimit(2)
-                        .frame(height: 30)
-                }
+                }.padding(.bottom, 25)
             }
         }
     }

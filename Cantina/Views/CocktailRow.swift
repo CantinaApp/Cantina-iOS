@@ -17,7 +17,13 @@ struct CocktailRow: View {
                 .frame(width: 75, height: 75)
                 .cornerRadius(10)
                 .padding(.trailing, 10)
-            Text(cocktail.name)
+            VStack(alignment: .leading) {
+                Text(cocktail.name)
+                Text(cocktail.ingredients.keys.joined(separator: ", "))
+                    .font(.caption)
+                    .lineLimit(1)
+            }
+            Spacer(minLength: 10)
         }
     }
 }

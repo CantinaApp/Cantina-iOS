@@ -11,6 +11,8 @@ struct CocktailsView: View {
     @EnvironmentObject var modelData: ModelData
     
     @ObservedObject var searchBar: SearchBar = SearchBar()
+    
+    @State var filterModal = false
 
     var body: some View {
         NavigationView {
@@ -25,7 +27,19 @@ struct CocktailsView: View {
             }
             .navigationBarTitle("Cocktails")
             .add(searchBar)
-        }
+            .toolbar {
+                Button(action: {
+                    self.filterModal.toggle()
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "line.horizontal.3.decrease")
+                        Text("Filter")
+                    }
+                }
+            }
+        }.sheet(isPresented: $filterModal, content: {
+            FilterModal()
+        })
     }
 }
 

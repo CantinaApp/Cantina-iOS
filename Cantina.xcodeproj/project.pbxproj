@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0A2E83262E4CD400A40D92 /* FilterModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A2E82262E4CD400A40D92 /* FilterModal.swift */; };
 		2C448008262B60EE005B4764 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C448007262B60EE005B4764 /* SearchBar.swift */; };
 		2C44800B262B67A1005B4764 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C44800A262B67A1005B4764 /* ViewControllerResolver.swift */; };
 		4E540A392613CF8A0054CF63 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E540A382613CF8A0054CF63 /* ModelData.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C0A2E82262E4CD400A40D92 /* FilterModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModal.swift; sourceTree = "<group>"; };
 		2C448007262B60EE005B4764 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		2C44800A262B67A1005B4764 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
 		4E540A382613CF8A0054CF63 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				4E540A3B2613FBFD0054CF63 /* ImageView.swift */,
 				608EA6E52620C93700B9DBEB /* CocktailGridItem.swift */,
 				2C448007262B60EE005B4764 /* SearchBar.swift */,
+				2C0A2E82262E4CD400A40D92 /* FilterModal.swift */,
 				2C44800A262B67A1005B4764 /* ViewControllerResolver.swift */,
 			);
 			path = Views;
@@ -212,6 +215,7 @@
 				2C448008262B60EE005B4764 /* SearchBar.swift in Sources */,
 				4E540A392613CF8A0054CF63 /* ModelData.swift in Sources */,
 				4EF468EB26169243007CCA93 /* FavoritesView.swift in Sources */,
+				2C0A2E83262E4CD400A40D92 /* FilterModal.swift in Sources */,
 				4E7833BC25FAA329002E0E4E /* CantinaApp.swift in Sources */,
 				608EA6E62620C93700B9DBEB /* CocktailGridItem.swift in Sources */,
 				4E8C648126129E35008DB114 /* Cocktail.swift in Sources */,

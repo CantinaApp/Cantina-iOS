@@ -13,6 +13,8 @@ struct CocktailsView: View {
     @ObservedObject var drinkSearchBar: SearchBar = SearchBar()
     
     @State var filterModal: Bool = false
+    
+    @State private var navBtnID = UUID()
 
     var body: some View {
         NavigationView {
@@ -37,11 +39,15 @@ struct CocktailsView: View {
                             Text("Filter")
                         }
                     }
+                    .id(self.navBtnID) //force layout engine to refresh because swift bug
                 }
             }
         }
         .sheet(isPresented: $filterModal) {
             FilterModal(filterModal: $filterModal)
+                .onDisappear {
+                    self.navBtnID = UUID()
+                }
         }
     }
 }

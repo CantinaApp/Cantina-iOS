@@ -37,7 +37,7 @@ struct CocktailDetailsView: View {
                         .bold()
 
                     ForEach(Array(cocktail.ingredients.keys), id: \.self) { (ingredient) in
-                        Text(cocktail.ingredients[ingredient]!.lowercased() + " " + ingredient)
+                        Text(cocktail.ingredients[ingredient]!.lowercased() + ingredient)
                     }
                 }
                 .padding(10)
@@ -64,7 +64,7 @@ struct CocktailDetailsView: View {
     func showShareSheet(name: String, instructions: String, ingredients: [String: String]) {
         var ingredientsString = ""
         for key in ingredients.keys {
-            ingredientsString.append(cocktail.ingredients[key]! + " " + key + "\n")
+            ingredientsString.append(cocktail.ingredients[key]!.lowercased() + key + "\n")
         }
         
         let shareString = ["Cocktail: " + name + "\nIngredients:\n" + ingredientsString + "Instructions: " + instructions]

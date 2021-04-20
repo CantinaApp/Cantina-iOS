@@ -10,14 +10,14 @@ import SwiftUI
 struct CocktailsView: View {
     @EnvironmentObject var modelData: ModelData
     
-    @ObservedObject var searchBar: SearchBar = SearchBar()
+    @ObservedObject var drinkSearchBar: SearchBar = SearchBar()
     
-    @State var filterModal = false
+    @State var filterModal: Bool = false
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(modelData.cocktails.filter { searchBar.text.isEmpty || $0.name.localizedStandardContains(searchBar.text) }) { (cocktail) in
+                ForEach(modelData.cocktails.filter { drinkSearchBar.text.isEmpty || $0.name.localizedStandardContains(drinkSearchBar.text) }) { (cocktail) in
                     HStack {
                         NavigationLink(destination: CocktailDetailsView(cocktail: cocktail)) {
                             CocktailRow(cocktail: cocktail)
@@ -26,20 +26,23 @@ struct CocktailsView: View {
                 }
             }
             .navigationBarTitle("Cocktails")
-            .add(searchBar)
+            .add(drinkSearchBar)
             .toolbar {
-                Button(action: {
-                    self.filterModal.toggle()
-                }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "line.horizontal.3.decrease")
-                        Text("Filter")
+                ToolbarItem {
+                    Button(action: {
+                        filterModal.toggle()
+                    }) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "line.horizontal.3.decrease")
+                            Text("Filter")
+                        }
                     }
                 }
             }
-        }.sheet(isPresented: $filterModal, content: {
-            FilterModal()
-        })
+        }
+        .sheet(isPresented: $filterModal) {
+            FilterModal(filterModal: $filterModal)
+        }
     }
 }
 

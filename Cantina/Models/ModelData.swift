@@ -10,9 +10,11 @@ import Foundation
 
 final class ModelData: ObservableObject {
     @Published var cocktails: [Cocktail]
+    @Published var ingredients: [Ingredient]
     
     init() {
         self.cocktails = [Cocktail]()
+        self.ingredients = [Ingredient]()
         loadCocktails()
         
         // Set image cache capacity
@@ -23,6 +25,7 @@ final class ModelData: ObservableObject {
     private func loadCocktails() {
         loadFavoritesFromStorage()
         loadCocktailsFromAPI()
+        loadIngredientsFromAPI()
     }
 
     private func loadCocktailsFromAPI() {
@@ -55,6 +58,24 @@ final class ModelData: ObservableObject {
             self.removeDuplicatesAndSort(&cocktails)
             self.cocktails = cocktails
         }
+    }
+    
+    private func loadIngredientsFromAPI() {
+        let url = URL(string: "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list")!
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error ) in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                let decoder = JSONDecoder()
+                if let ingredientList = try? decoder.decode(IngredientList.self, from: data) {
+                    self.ingredients = ingredientList.ingredients
+                    self.ingredients.sort { (a, b) -> Bool in
+                        a.name < b.name
+                    }
+                }
+            }
+        }
+        task.resume()
     }
     
     private func loadFavoritesFromStorage() {

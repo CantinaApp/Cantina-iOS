@@ -9,47 +9,42 @@ import SwiftUI
 
 struct FilterModal: View {
     
-    @ObservedObject var filterSearchBar: SearchBar = SearchBar()
-    
-    var ingredients = (0...60).map{"Ingredient #\($0)"}
-    
+    @EnvironmentObject var modelData: ModelData
+        
     @Binding var filterModal: Bool
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(self.ingredients.filter { filterSearchBar.text.isEmpty || $0.localizedStandardContains(filterSearchBar.text) }, id:\.self) { (ingredient) in
-                    HStack {
-                        Text(ingredient)
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Color.blue)
+                ForEach(Array(modelData.ingredients.enumerated()), id:\.offset) { (index, ingredient) in
+                    Button(action: {modelData.ingredients[index].isSelected.toggle()} ) {
+                        HStack {
+                            Text(ingredient.name)
+                            Spacer()
+                            Image(systemName: (ingredient.isSelected) ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(Color.blue)
+                        }
                     }
                 }
             }
-            .add(filterSearchBar)
             .navigationBarTitle("Select Ingredients", displayMode: .inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        filterModal = false
-                    }
-                }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Apply") {
-                        print("Apply filter for selected ingredients and dismiss modal")
-                        filterModal = false
+                    Button("Done") {
+                        filterModal.toggle()
                     }
                 }
-            }
-            .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Clear") {
-                        print("Clear all selected ingredients")
+                        Array(modelData.ingredients.enumerated()).forEach { (index, ingredient) in
+                            modelData.ingredients[index].isSelected = false
+                        }
                     }
                     Spacer()
                     Button("Select All") {
-                        print("Select all ingredients")
+                        Array(modelData.ingredients.enumerated()).forEach { (index, ingredient) in
+                            modelData.ingredients[index].isSelected = true
+                        }
                     }
                 }
             }

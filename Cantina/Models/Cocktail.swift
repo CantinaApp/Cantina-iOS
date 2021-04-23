@@ -147,7 +147,7 @@ extension Cocktail: Codable {
                     let ingredient = try container.decode(String.self, forKey: ingredient)
                     var measurement = (try? container.decode(String.self, forKey: measurement)) ?? ""
                     
-                    if (!measurement.hasSuffix(" ")) {
+                    if (!measurement.isEmpty && !measurement.hasSuffix(" ")) {
                         measurement = measurement + " "
                     }
                     

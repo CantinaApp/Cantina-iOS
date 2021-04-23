@@ -53,7 +53,6 @@ struct CocktailDetailsView: View {
             }
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
-        .padding(.bottom, 20)
         .toolbar {
             Button(action: { showShareSheet(name: cocktail.name, instructions: cocktail.instructions, ingredients: cocktail.ingredients) }) {
                 Image(systemName: "square.and.arrow.up")

@@ -21,6 +21,7 @@ struct CocktailGridItem: View {
                         .font(.system(size: 12))
                         .lineLimit(2)
                         .frame(height: 30)
+                        .foregroundColor(.primary)
                 }
             }
         }

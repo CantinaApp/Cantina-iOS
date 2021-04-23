@@ -52,11 +52,11 @@ struct CocktailDetailsView: View {
                 .padding(10)
             }
         }
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .padding(.bottom, 20)
         .toolbar {
             Button(action: { showShareSheet(name: cocktail.name, instructions: cocktail.instructions, ingredients: cocktail.ingredients) }) {
                 Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(Color.gray)
             }
         }
     }

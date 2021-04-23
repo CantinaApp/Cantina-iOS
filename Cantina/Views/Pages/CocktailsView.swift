@@ -44,7 +44,7 @@ struct CocktailsView: View {
             }
         }
         .sheet(isPresented: $filterModal) {
-            FilterModal(filterModal: $filterModal)
+            FilterModal(filterModal: $filterModal, selectedIngredients: modelData.ingredients)
                 .onDisappear {
                     self.navBtnID = UUID()
                 }
@@ -53,7 +53,7 @@ struct CocktailsView: View {
 }
 
 func filterCocktails(modelData: ModelData, query: String) -> Array<Cocktail> {
-    // Filter by search query
+    // Filter by search bar
     var results = modelData.cocktails.filter { query.isEmpty || $0.name.localizedStandardContains(query) }
     
     let selectedIngredients = modelData.ingredients.filter { $0.isSelected }.map{ $0.name }

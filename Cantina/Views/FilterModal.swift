@@ -13,15 +13,17 @@ struct FilterModal: View {
         
     @Binding var filterModal: Bool
     
+    @State var selectedIngredients: Array<Ingredient>
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(modelData.ingredients.enumerated()), id:\.offset) { (index, ingredient) in
-                    Button(action: {modelData.ingredients[index].isSelected.toggle()} ) {
+                ForEach(Array(selectedIngredients.enumerated()), id:\.offset) { (index, ingredient) in
+                    Button(action: {selectedIngredients[index].isSelected.toggle()} ) {
                         HStack {
                             Text(ingredient.name)
                             Spacer()
-                            Image(systemName: (ingredient.isSelected) ? "checkmark.circle.fill" : "circle")
+                            Image(systemName: (selectedIngredients[index].isSelected) ? "checkmark.circle.fill" : "circle")
                                 .foregroundColor(Color.blue)
                         }
                     }
@@ -29,21 +31,27 @@ struct FilterModal: View {
             }
             .navigationBarTitle("Select Ingredients", displayMode: .inline)
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        filterModal.toggle()
+                    }
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
+                        modelData.ingredients = selectedIngredients
                         filterModal.toggle()
                     }
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Clear") {
-                        Array(modelData.ingredients.enumerated()).forEach { (index, ingredient) in
-                            modelData.ingredients[index].isSelected = false
+                        Array(selectedIngredients.enumerated()).forEach { (index, ingredient) in
+                            selectedIngredients[index].isSelected = false
                         }
                     }
                     Spacer()
                     Button("Select All") {
-                        Array(modelData.ingredients.enumerated()).forEach { (index, ingredient) in
-                            modelData.ingredients[index].isSelected = true
+                        Array(selectedIngredients.enumerated()).forEach { (index, ingredient) in
+                            selectedIngredients[index].isSelected = true
                         }
                     }
                 }

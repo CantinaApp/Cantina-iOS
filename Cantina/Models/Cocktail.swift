@@ -145,7 +145,12 @@ extension Cocktail: Codable {
             try ingredientMap.forEach { (ingredient, measurement) in
                 do {
                     let ingredient = try container.decode(String.self, forKey: ingredient)
-                    let measurement = (try? container.decode(String.self, forKey: measurement)) ?? ""
+                    var measurement = (try? container.decode(String.self, forKey: measurement)) ?? ""
+                    
+                    if (!measurement.isEmpty && !measurement.hasSuffix(" ")) {
+                        measurement = measurement + " "
+                    }
+                    
                     self.ingredients[ingredient] = measurement
                 } catch DecodingError.valueNotFound {
                     // Inside of closure, so return will only end current iteration

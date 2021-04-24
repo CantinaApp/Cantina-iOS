@@ -19,7 +19,9 @@ struct CocktailGridItem: View {
                         .frame(width: 125, height: 125)
                         .cornerRadius(10)
                     Text(cocktail.name)
-                }.padding(.bottom, 25)
+                        .foregroundColor(.primary)
+                }
+                .padding(.bottom, 25)
             }
         }
     }

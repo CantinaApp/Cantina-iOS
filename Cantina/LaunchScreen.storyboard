@@ -56,9 +56,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchIcon" width="36" height="36"/>
+        <image name="LaunchIcon" width="24" height="24"/>
         <namedColor name="AccentColor">
-            <color red="0.21176470588235294" green="0.40784313725490196" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.69019607843137254" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
